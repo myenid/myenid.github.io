@@ -70,18 +70,18 @@
 <p>说到底还是菜。</p>
 <p>看了WP之后，学会了one_gadgets然后我又回来看这个代码，怎么看怎么有问题。</p>
 <p>然后我发现<strong>汇编真香</strong></p>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">.text:0000000000001187                 lea     rax, <span class="token punctuation">[</span>rbp+var_18<span class="token punctuation">]</span>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">.text:0000000000001187                 lea     rax, [rbp+var_18]
 .text:000000000000118B                 mov     rsi, rax
-.text:000000000000118E                 lea     rdi, aLd        <span class="token punctuation">;</span> <span class="token string">"%ld"</span>
-.text:0000000000001195                 mov     eax, <span class="token number">0</span>
+.text:000000000000118E                 lea     rdi, aLd        ; &quot;%ld&quot;
+.text:0000000000001195                 mov     eax, 0
 .text:000000000000119A                 call    ___isoc99_scanf
-.text:000000000000119F                 mov     rax, <span class="token punctuation">[</span>rbp+var_18<span class="token punctuation">]</span>
-.text:00000000000011A3                 mov     <span class="token punctuation">[</span>rbp+var_10<span class="token punctuation">]</span>, rax
-.text:00000000000011A7                 mov     rdx, <span class="token punctuation">[</span>rbp+var_10<span class="token punctuation">]</span>
-.text:00000000000011AB                 mov     eax, <span class="token number">0</span>
+.text:000000000000119F                 mov     rax, [rbp+var_18]
+.text:00000000000011A3                 mov     [rbp+var_10], rax
+.text:00000000000011A7                 mov     rdx, [rbp+var_10]
+.text:00000000000011AB                 mov     eax, 0
 .text:00000000000011B0                 call    rdx
-.text:00000000000011B2                 mov     eax, <span class="token number">0</span>
-.text:00000000000011B7                 mov     rcx, <span class="token punctuation">[</span>rbp+var_8<span class="token punctuation">]</span>
+.text:00000000000011B2                 mov     eax, 0
+.text:00000000000011B7                 mov     rcx, [rbp+var_8]
 .text:00000000000011BB                 xor     rcx, fs:28h
 .text:00000000000011C4                 jz      short locret_11CB
 .text:00000000000011C6                 call    ___stack_chk_fail<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
