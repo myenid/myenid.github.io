@@ -32,7 +32,7 @@
 <meta property="og:image" content="https://i.loli.net/2021/05/19/TOPCQZ98kDRte2q.png">
 <meta property="og:image" content="https://i.loli.net/2021/05/19/dVwscDtyH1Sgnai.png">
 <meta property="article:published_time" content="2021-05-19T01:12:19.000Z">
-<meta property="article:modified_time" content="2021-05-19T01:51:16.041Z">
+<meta property="article:modified_time" content="2021-05-19T05:51:27.040Z">
 <meta property="article:author" content="Ev3r">
 <meta property="article:tag" content="VNCTF2021">
 <meta name="twitter:card" content="summary">
@@ -152,7 +152,15 @@
 <ul>
 <li>eneneenne，看东西还是要非常的仔细，虽然这个题目可以说不难，但是，洞可以说是比较隐秘了。。</li>
 </ul>
-<h2 id="ff"><a href="#ff" class="headerlink" title="ff"></a>ff</h2></div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>Ev3r</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="http://example.com/2021/05/19/VNCTF2021/" title="VNCTF2021">http://example.com/2021/05/19/VNCTF2021/</a></li><li class="post-copyright-license"><strong>版权声明：</strong>本博客所有文章除特别声明外，均默认采用 <a href="https://creativecommons.org/licenses/by-Ev3r/4.0/deed.zh" target="_blank" rel="noopener" title="CC BY-EV3R 4.0 "><svg class="icon"><use xlink:href="#icon-creative-commons-line"></use></svg><svg class="icon"><use xlink:href="#icon-creative-commons-by-line"></use></svg><svg class="icon"><use xlink:href="#icon-creative-commons-Ev3r-line"></use></svg></a> 许可协议。</li></ul></section></article><div class="post-nav"><div class="post-nav-item"></div><div class="post-nav-item"><a class="post-nav-next" href="/2021/05/19/0ctf-2017-babyheap/" rel="next" title="0ctf-2017-babyheap"><span class="post-nav-text">0ctf-2017-babyheap</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-arrow-right-s-line"></use></svg></a></div></div></div><div class="hty-card" id="comment"><div class="comment-tooltip text-center"><span>如果您有任何关于博客内容的相关讨论，欢迎前往 <a href="https://github.com/YunYouJun/yunyoujun.github.io/discussions" target="_blank">GitHub Discussions</a> 与我交流。</span><br></div><div id="waline"></div><script>Yun.utils.getScript("https://cdn.jsdelivr.net/npm/@waline/client/dist/Waline.min.js", () => {
+<h2 id="ff"><a href="#ff" class="headerlink" title="ff"></a>ff</h2><p>这题是libc2.32的，本地调试的话学了一下patchelf来换ld和libc</p>
+<p>然而网上搜了很多方法最后还是没有成功。</p>
+<p>这题也是打的前面的tachebin管理器，造成一个free进去unsorted bin，然后这题比前几天写的国赛还要绝，只有一次show的机会，所以，第一次泄露heapbase之后就没法泄露libc基址了，所以想到劫持一个<code>stdout</code>，但是不知道该咋办，然后看师傅的wp，说</p>
+<blockquote>
+<p>考虑到 tcache管理器 本身便是一个 0x291的堆块，我们可以劫持之后改对应计数为7后free掉，送入 unsorted bin 中，之后切割这个大chunk，利用残留指针 大概1/16 的几率可以爆破到 stdout 附近，劫持 stdout 以泄露 libc 基址，最后改 __free_hook 为 system 函数后释放一个内容为 /bin/sh的 chunk 即可 get shell</p>
+</blockquote>
+<p>问题是为什么unsorted bin 切割可以爆破到stdout附近。</p>
+<p>见我的<a target="_blank" rel="noopener" href="https://myenid.github.io/2021/05/13/%E5%A0%86%E7%9F%A5%E8%AF%86-%E6%8C%81%E7%BB%AD/">堆基础</a></p>
+</div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>Ev3r</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="http://example.com/2021/05/19/VNCTF2021/" title="VNCTF2021">http://example.com/2021/05/19/VNCTF2021/</a></li><li class="post-copyright-license"><strong>版权声明：</strong>本博客所有文章除特别声明外，均默认采用 <a href="https://creativecommons.org/licenses/by-Ev3r/4.0/deed.zh" target="_blank" rel="noopener" title="CC BY-EV3R 4.0 "><svg class="icon"><use xlink:href="#icon-creative-commons-line"></use></svg><svg class="icon"><use xlink:href="#icon-creative-commons-by-line"></use></svg><svg class="icon"><use xlink:href="#icon-creative-commons-Ev3r-line"></use></svg></a> 许可协议。</li></ul></section></article><div class="post-nav"><div class="post-nav-item"></div><div class="post-nav-item"><a class="post-nav-next" href="/2021/05/19/0ctf-2017-babyheap/" rel="next" title="0ctf-2017-babyheap"><span class="post-nav-text">0ctf-2017-babyheap</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-arrow-right-s-line"></use></svg></a></div></div></div><div class="hty-card" id="comment"><div class="comment-tooltip text-center"><span>如果您有任何关于博客内容的相关讨论，欢迎前往 <a href="https://github.com/YunYouJun/yunyoujun.github.io/discussions" target="_blank">GitHub Discussions</a> 与我交流。</span><br></div><div id="waline"></div><script>Yun.utils.getScript("https://cdn.jsdelivr.net/npm/@waline/client/dist/Waline.min.js", () => {
   const walineConfig = {"enable":true,"serverURL":"https://waline.yunyoujun.cn","comment":true,"visitor":true,"avatarCDN":"https://cdn.v2ex.com/gravatar/","placeholder":"填写邮箱，可以收到回复通知哦～","requiredFields":["nick"],"el":"#waline","lang":"zh-CN"}
   walineConfig.path = "/2021/05/19/VNCTF2021/"
   new Waline(walineConfig)
